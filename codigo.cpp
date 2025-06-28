@@ -1,14 +1,3 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/9lPju_Hi)
-# parte2
-✏️ Parte I – Completar una función del CRUD
-📝 Instrucciones:
-A continuación te damos un programa incompleto que implementa parte del CRUD de estudiantes usando estructuras (struct), funciones y manejo de archivos. Tu tarea es completar la función faltante correspondiente a una operación del CRUD, siguiendo las indicaciones.
-
-Puedes usar o no el manejo de archivos según lo desees, pero si lo implementas correctamente obtendrás **2 puntos extra**.
-
-🔧 Código proporcionado (incompleto):
-
-```cpp
 #include <iostream>
 #include <fstream>
 using namespace std;
@@ -59,13 +48,46 @@ void mostrarEstudiantes() {
 
 // -----------------------------
 // 👇 TU TAREA: Completa esta función (UPDATE)
-void modificarEstudiante() {
+  void modificarEstudiante() {
+    ifstream archivo("estudiantes.txt");
+    ofstream temp("modi.txt");
+    Estudiante e;
+    string buscado;
+    bool modificado = false;
+
+    cout << "Ingrese carnet a modificar: ";
+    cin >> buscado;
+
+    if (archivo.is_open() && temp.is_open()) {
+
+        while (archivo >> e.nombre >> e.carnet >> e.edad) {
+            if (e.carnet == buscado) {
+                Estudiante modificacion;
+                cout << "ingrese el nuevo nombre (sin espacios): ";
+                cin >> modificacion.nombre;
+                cout << "ingresa el nuevo carnet carnet: ";
+                cin >> modificacion.carnet;
+                cout << "ingresa la nueva edad: ";
+                cin >> modificacion.edad;
+
+                temp << modificacion.nombre << " " <<modificacion.carnet << " " << modificacion.edad << "\n";
+                modificado = true;
+            } 
+            else {
+                temp << e.nombre << " " << e.carnet << " " << e.edad << "\n";
+            }
+        }
+        archivo.close();
+        temp.close();
+       
+}
+  }
+  
     
     // Debes permitir actualizar nombre, carnet y/o edad
     // de un estudiante identificado por su carnet.
     // Puedes usar o no manejo de archivos.
     // Si lo implementas con archivos correctamente, obtendrás **2 puntos extra**.
-}
 // -----------------------------
 
 // Función para eliminar estudiante (DELETE)
@@ -127,16 +149,3 @@ int main() {
 
     return 0;
 }
-```
-📌 Tu tarea:
-Completa la función modificarEstudiante() para que:
-
-Lea el carnet del estudiante a modificar.
-
-Permita ingresar los nuevos datos.
-
-Sustituya el registro correspondiente.
-
-Muestre un mensaje de confirmación o de error.
-
-Si usas archivos correctamente, obtendrás 2 puntos extra.
